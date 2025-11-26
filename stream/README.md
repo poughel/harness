@@ -1,91 +1,91 @@
-# Stream Module
+# Stream 模块
 
-The `stream` module provides stream processing capabilities for distributed message processing.
+`stream` 模块为分布式消息处理提供流处理功能。
 
-## Overview
+## 概述
 
-This module implements a stream-based message processing system built on top of Redis Streams or in-memory queues. It provides reliable message delivery, consumer groups, and fault-tolerant processing.
+该模块实现基于 Redis Streams 或内存队列的流式消息处理系统。它提供可靠的消息传递、消费者组和容错处理。
 
-## Features
+## 功能特性
 
-- Stream-based messaging
-- Consumer groups for parallel processing
-- Message acknowledgment
-- Automatic retry with backoff
-- Dead letter queue for failed messages
-- In-memory and Redis implementations
-- Concurrent message processing
-- Stream monitoring and statistics
+- 基于流的消息传递
+- 用于并行处理的消费者组
+- 消息确认
+- 带退避的自动重试
+- 失败消息的死信队列
+- 内存和 Redis 实现
+- 并发消息处理
+- 流监控和统计
 
-## Architecture
+## 架构
 
-### Producer
-- Publishes messages to streams
-- Ensures message delivery
-- Supports batch publishing
+### Producer（生产者）
+- 向流发布消息
+- 确保消息传递
+- 支持批量发布
 
-### Consumer
-- Processes messages from streams
-- Configurable concurrency
-- Automatic retry on failure
-- Message acknowledgment
-- Idle message claiming
+### Consumer（消费者）
+- 从流处理消息
+- 可配置的并发
+- 失败时自动重试
+- 消息确认
+- 空闲消息认领
 
-## Key Components
+## 核心组件
 
-### ConsumerConfig
-Configuration for stream consumers:
-- Concurrency: Number of worker goroutines
-- DefaultHandlerConfig: Default settings for handlers
+### ConsumerConfig（消费者配置）
+流消费者的配置：
+- Concurrency：工作 goroutine 的数量
+- DefaultHandlerConfig：处理器的默认设置
 
-### HandlerConfig
-Configuration for individual stream handlers:
-- IdleTimeout: Time before message can be reclaimed
-- MaxRetries: Maximum retry attempts
-- Batch processing options
+### HandlerConfig（处理器配置）
+单个流处理器的配置：
+- IdleTimeout：消息可以被重新认领之前的时间
+- MaxRetries：最大重试次数
+- 批处理选项
 
-## Usage
+## 使用示例
 
 ```go
-// Create a producer
+// 创建生产者
 producer := stream.NewProducer(config)
 
-// Publish messages
+// 发布消息
 err := producer.Publish(ctx, streamName, message)
 
-// Create a consumer
+// 创建消费者
 consumer := stream.NewConsumer(config)
 
-// Register a stream handler
+// 注册流处理器
 err := consumer.Register(streamName, func(ctx context.Context, msg *Message) error {
-    // Process message
+    // 处理消息
     return processMessage(msg)
 }, handlerOptions...)
 
-// Start consuming
+// 开始消费
 err := consumer.Start(ctx)
 
-// Graceful shutdown
+// 优雅关闭
 consumer.Stop()
 ```
 
-## Message Processing
+## 消息处理
 
-Messages are processed with:
-- Automatic acknowledgment on success
-- Retry with exponential backoff on failure
-- Dead letter queue after max retries
-- Exactly-once processing semantics (when configured)
+消息处理具有：
+- 成功时自动确认
+- 失败时带指数退避的重试
+- 达到最大重试次数后进入死信队列
+- 一次性处理语义（配置时）
 
-## Consumer Groups
+## 消费者组
 
-Multiple consumers can process from the same stream:
-- Load distribution across consumers
-- Automatic failover
-- Message claiming from failed consumers
-- Parallel processing
+多个消费者可以从同一流处理：
+- 跨消费者的负载分配
+- 自动故障转移
+- 从失败消费者认领消息
+- 并行处理
 
-## Configuration
+## 配置
 
 ```go
 consumerConfig := stream.ConsumerConfig{
@@ -97,41 +97,41 @@ consumerConfig := stream.ConsumerConfig{
 }
 ```
 
-## Use Cases
+## 使用场景
 
-- Pipeline execution events
-- Webhook delivery
-- Background job processing
-- Event processing
-- Asynchronous task execution
-- Data synchronization
-- Notification delivery
+- 流水线执行事件
+- Webhook 传递
+- 后台作业处理
+- 事件处理
+- 异步任务执行
+- 数据同步
+- 通知传递
 
-## Error Handling
+## 错误处理
 
-- Failed messages are retried automatically
-- Configurable retry limits
-- Dead letter queue for permanently failed messages
-- Error logging and monitoring
+- 失败的消息自动重试
+- 可配置的重试限制
+- 永久失败消息的死信队列
+- 错误日志和监控
 
-## Monitoring
+## 监控
 
-Track consumer performance:
-- Message processing rate
-- Error rates
-- Pending message count
-- Consumer lag
-- Handler execution time
+跟踪消费者性能：
+- 消息处理速率
+- 错误率
+- 待处理消息数
+- 消费者滞后
+- 处理器执行时间
 
-## Best Practices
+## 最佳实践
 
-- Set appropriate concurrency levels
-- Configure retry limits based on operation type
-- Implement idempotent message handlers
-- Monitor consumer lag
-- Use dead letter queues for debugging
-- Gracefully shutdown consumers
+- 设置适当的并发级别
+- 根据操作类型配置重试限制
+- 实现幂等消息处理器
+- 监控消费者滞后
+- 使用死信队列进行调试
+- 优雅地关闭消费者
 
-## License
+## 许可证
 
 Apache License 2.0

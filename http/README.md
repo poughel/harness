@@ -1,71 +1,71 @@
-# HTTP Module
+# HTTP 模块
 
-The `http` module provides HTTP utilities and middleware for the Harness web server.
+`http` 模块为 Harness Web 服务器提供 HTTP 实用工具和中间件。
 
-## Overview
+## 概述
 
-This module contains common HTTP utilities, middleware components, and helpers used throughout the Harness web application. It provides standardized request/response handling, error processing, and common HTTP patterns.
+该模块包含在整个 Harness Web 应用程序中使用的通用 HTTP 实用工具、中间件组件和辅助函数。它提供标准化的请求/响应处理、错误处理和常见的 HTTP 模式。
 
-## Features
+## 功能特性
 
-- HTTP middleware components
-- Request and response utilities
-- Error handling and formatting
-- HTTP client helpers
-- Content negotiation
-- Request validation
+- HTTP 中间件组件
+- 请求和响应实用工具
+- 错误处理和格式化
+- HTTP 客户端辅助函数
+- 内容协商
+- 请求验证
 
-## Common Middleware
+## 常见中间件
 
-- Authentication middleware
-- Authorization checks
-- Request logging
-- Error recovery
-- CORS handling
-- Rate limiting
-- Request ID injection
+- 身份验证中间件
+- 授权检查
+- 请求日志记录
+- 错误恢复
+- CORS 处理
+- 速率限制
+- 请求 ID 注入
 
-## HTTP Utilities
+## HTTP 实用工具
 
-- Response writers and formatters
-- JSON encoding/decoding helpers
-- Query parameter parsing
-- Header manipulation
-- Content-type detection
-- Status code helpers
+- 响应写入器和格式化器
+- JSON 编码/解码辅助函数
+- 查询参数解析
+- 头部操作
+- 内容类型检测
+- 状态码辅助函数
 
-## Usage
+## 使用示例
 
 ```go
-// Write JSON response
+// 写入 JSON 响应
 http.WriteJSON(w, data, http.StatusOK)
 
-// Write error response
+// 写入错误响应
 http.WriteError(w, err, http.StatusBadRequest)
 
-// Parse request body
+// 解析请求体
 var input RequestType
 err := http.DecodeJSON(r.Body, &input)
 
-// Apply middleware
+// 应用中间件
 handler = http.Chain(handler, authMiddleware, loggingMiddleware)
 ```
 
-## Error Handling
+## 错误处理
 
-The module provides standardized error responses with:
-- Consistent error format
-- HTTP status code mapping
-- Error message sanitization
-- Error logging integration
+该模块提供标准化的错误响应，包括：
+- 一致的错误格式
+- HTTP 状态码映射
+- 错误消息净化
+- 错误日志集成
 
-## Best Practices
+## 最佳实践
 
-- Use provided utilities for consistency
-- Apply appropriate middleware in correct order
-- Handle errors with proper status codes
-- Log requests for debugging and monitoring
+- 使用提供的实用工具以保持一致性
+- 以正确的顺序应用适当的中间件
+- 使用适当的状态码处理错误
+- 记录请求以便调试和监控
 
-## License
+## 许可证
 
 Apache License 2.0

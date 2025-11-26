@@ -1,103 +1,103 @@
-# Pubsub Module
+# Pubsub 模块
 
-The `pubsub` module provides publish-subscribe messaging for inter-process communication.
+`pubsub` 模块为进程间通信提供发布-订阅消息传递。
 
-## Overview
+## 概述
 
-This module implements a pub-sub messaging system that allows different parts of the application to communicate asynchronously through topics. It supports both in-memory and Redis-based messaging for scalability.
+该模块实现发布-订阅消息系统，允许应用程序的不同部分通过主题异步通信。它支持内存和基于 Redis 的消息传递以实现可扩展性。
 
-## Features
+## 功能特性
 
-- Topic-based messaging
-- Multiple subscriber support
-- In-memory and Redis backends
-- Message delivery guarantees
-- Consumer groups
-- Message persistence (Redis mode)
-- Graceful shutdown handling
+- 基于主题的消息传递
+- 多订阅者支持
+- 内存和 Redis 后端
+- 消息传递保证
+- 消费者组
+- 消息持久化（Redis 模式）
+- 优雅关闭处理
 
-## Messaging Modes
+## 消息传递模式
 
-- **InMemory**: For single-instance deployments or testing
-- **Redis**: For distributed deployments with multiple instances
+- **InMemory**：用于单实例部署或测试
+- **Redis**：用于多实例的分布式部署
 
-## Key Interfaces
+## 核心接口
 
-### Publisher
-- `Publish`: Send messages to a topic
+### Publisher（发布者）
+- `Publish`：向主题发送消息
 
-### PubSub
-Combines Publisher with:
-- `Subscribe`: Register a handler for a topic
+### PubSub（发布-订阅）
+结合发布者和：
+- `Subscribe`：为主题注册处理器
 
-### Consumer
-- `Subscribe`: Subscribe to topics
-- `Unsubscribe`: Unsubscribe from topics
-- `Close`: Cleanup consumer resources
+### Consumer（消费者）
+- `Subscribe`：订阅主题
+- `Unsubscribe`：取消订阅主题
+- `Close`：清理消费者资源
 
-## Usage
+## 使用示例
 
 ```go
-// Create a pub-sub instance
+// 创建发布-订阅实例
 ps := pubsub.New(config)
 
-// Publish a message
+// 发布消息
 err := ps.Publish(ctx, "user.created", payload)
 
-// Subscribe to a topic
+// 订阅主题
 consumer := ps.Subscribe(ctx, "user.created", func(payload []byte) error {
-    // Handle message
+    // 处理消息
     return processUserCreated(payload)
 })
 
-// Subscribe to multiple topics
+// 订阅多个主题
 err := consumer.Subscribe(ctx, "user.updated", "user.deleted")
 
-// Cleanup
+// 清理
 consumer.Close()
 ```
 
-## Configuration
+## 配置
 
 ```go
 config := pubsub.Config{
     Mode: pubsub.ModeRedis,
     Namespace: "harness",
-    // Redis-specific settings
+    // Redis 特定设置
 }
 ```
 
-## Message Patterns
+## 消息模式
 
-- **Fan-out**: One publisher, multiple subscribers
-- **Work queue**: Multiple consumers processing from the same topic
-- **Topic routing**: Route messages based on topic patterns
+- **扇出**：一个发布者，多个订阅者
+- **工作队列**：多个消费者从同一主题处理
+- **主题路由**：基于主题模式路由消息
 
-## Use Cases
+## 使用场景
 
-- Event notifications
-- Asynchronous task distribution
-- Cache invalidation
-- Real-time updates
-- Microservice communication
-- Webhook delivery
-- Activity feeds
+- 事件通知
+- 异步任务分发
+- 缓存失效
+- 实时更新
+- 微服务通信
+- Webhook 传递
+- 活动动态
 
-## Reliability
+## 可靠性
 
-- Message persistence in Redis mode
-- Automatic reconnection
-- Error handling in message handlers
-- Graceful degradation
+- Redis 模式下的消息持久化
+- 自动重新连接
+- 消息处理器中的错误处理
+- 优雅降级
 
-## Best Practices
+## 最佳实践
 
-- Use meaningful topic names
-- Keep message handlers idempotent
-- Handle errors in message processing
-- Use appropriate mode for deployment type
-- Clean up consumers on shutdown
+- 使用有意义的主题名称
+- 保持消息处理器幂等
+- 处理消息处理中的错误
+- 为部署类型使用适当的模式
+- 关闭时清理消费者
 
-## License
+## 许可证
 
 Apache License 2.0

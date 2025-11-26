@@ -1,50 +1,50 @@
-# Logging Module
+# Logging 模块
 
-The `logging` module provides structured logging configuration and utilities for the Harness application.
+`logging` 模块为 Harness 应用程序提供结构化日志配置和实用工具。
 
-## Overview
+## 概述
 
-This module sets up and configures the logging infrastructure used throughout the application. It provides structured logging with multiple output formats and log levels.
+该模块设置和配置整个应用程序使用的日志基础设施。它提供具有多种输出格式和日志级别的结构化日志。
 
-## Features
+## 功能特性
 
-- Structured logging with JSON and text formats
-- Configurable log levels (debug, info, warn, error)
-- Contextual logging with fields
-- Request-scoped logging
-- Log output configuration (stdout, files)
-- Performance-optimized logging
-- Integration with monitoring systems
+- 具有 JSON 和文本格式的结构化日志
+- 可配置的日志级别（调试、信息、警告、错误）
+- 带字段的上下文日志
+- 请求范围的日志
+- 日志输出配置（标准输出、文件）
+- 性能优化的日志
+- 与监控系统集成
 
-## Log Levels
+## 日志级别
 
-- **Debug**: Detailed information for debugging
-- **Info**: General informational messages
-- **Warn**: Warning messages for potentially harmful situations
-- **Error**: Error messages for error events
-- **Fatal**: Critical errors that cause application termination
+- **Debug**：用于调试的详细信息
+- **Info**：一般信息消息
+- **Warn**：潜在有害情况的警告消息
+- **Error**：错误事件的错误消息
+- **Fatal**：导致应用程序终止的严重错误
 
-## Usage
+## 使用示例
 
 ```go
-// Setup logging
+// 设置日志
 logging.Setup(config)
 
-// Basic logging
+// 基本日志
 log.Info().Msg("Application started")
 log.Error().Err(err).Msg("Failed to connect to database")
 
-// Logging with fields
+// 带字段的日志
 log.Info().
     Str("user", username).
     Int("count", count).
     Msg("User action completed")
 
-// Context-aware logging
+// 上下文感知日志
 logger := log.Ctx(ctx)
 logger.Info().Msg("Request processed")
 
-// Structured error logging
+// 结构化错误日志
 log.Error().
     Err(err).
     Str("operation", "create_repo").
@@ -52,33 +52,33 @@ log.Error().
     Msg("Repository creation failed")
 ```
 
-## Configuration
+## 配置
 
 ```go
 config := logging.Config{
     Level: "info",
-    Format: "json",  // or "text"
-    Pretty: false,   // pretty print for development
+    Format: "json",  // 或 "text"
+    Pretty: false,   // 开发时美化打印
 }
 ```
 
-## Best Practices
+## 最佳实践
 
-- Use appropriate log levels
-- Include context in log messages
-- Use structured fields instead of string formatting
-- Don't log sensitive information (passwords, tokens)
-- Use contextual logging for request tracking
-- Keep log messages concise and actionable
+- 使用适当的日志级别
+- 在日志消息中包含上下文
+- 使用结构化字段而不是字符串格式化
+- 不要记录敏感信息（密码、令牌）
+- 使用上下文日志进行请求跟踪
+- 保持日志消息简洁且可操作
 
-## Integration
+## 集成
 
-The logging module integrates with:
-- HTTP middleware for request logging
-- Error tracking systems
-- Monitoring and alerting platforms
-- Log aggregation services
+日志模块与以下集成：
+- 用于请求日志的 HTTP 中间件
+- 错误跟踪系统
+- 监控和告警平台
+- 日志聚合服务
 
-## License
+## 许可证
 
 Apache License 2.0

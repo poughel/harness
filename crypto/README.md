@@ -1,50 +1,50 @@
-# Crypto Module
+# Crypto 模块
 
-The `crypto` module provides cryptographic utilities and helpers for the Harness application.
+`crypto` 模块为 Harness 应用程序提供加密实用工具和辅助函数。
 
-## Overview
+## 概述
 
-This module contains cryptographic functions and utilities used throughout the application for security-related operations such as hashing, signing, and verification.
+该模块包含在整个应用程序中用于安全相关操作的加密函数和实用工具，例如哈希、签名和验证。
 
-## Features
+## 功能特性
 
-- Cryptographic hashing functions
-- Signature generation and verification
-- Secure random generation
-- Password hashing and validation
-- Token generation
+- 加密哈希函数
+- 签名生成和验证
+- 安全随机数生成
+- 密码哈希和验证
+- 令牌生成
 
-## Key Components
+## 核心组件
 
-- Hash generation utilities
-- Signing and verification helpers
-- Random string/token generators
-- Security-focused cryptographic primitives
+- 哈希生成实用工具
+- 签名和验证辅助函数
+- 随机字符串/令牌生成器
+- 以安全为重点的加密基元
 
-## Usage
+## 使用示例
 
 ```go
-// Generate a secure random token
+// 生成安全的随机令牌
 token := crypto.GenerateToken(32)
 
-// Hash a password
+// 哈希密码
 hash := crypto.HashPassword(password)
 
-// Verify a password
+// 验证密码
 valid := crypto.VerifyPassword(password, hash)
 ```
 
-## Security Considerations
+## 安全注意事项
 
-- Uses industry-standard cryptographic algorithms
-- Follows security best practices
-- Designed for common application security needs
-- Not intended for implementing custom cryptographic protocols
+- 使用业界标准的加密算法
+- 遵循安全最佳实践
+- 专为常见的应用程序安全需求而设计
+- 不适用于实现自定义加密协议
 
-## Dependencies
+## 依赖项
 
-This module may use standard Go cryptographic libraries and vetted third-party crypto packages.
+该模块可能使用标准的 Go 加密库和经过审查的第三方加密包。
 
-## License
+## 许可证
 
 Apache License 2.0

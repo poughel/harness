@@ -1,38 +1,38 @@
-# Events Module
+# Events 模块
 
-The `events` module provides an event streaming and processing framework for real-time system events.
+`events` 模块为实时系统事件提供事件流和处理框架。
 
-## Overview
+## 概述
 
-This module implements an event-driven architecture that allows different parts of the system to publish and subscribe to events. It supports both in-memory and Redis-based event streaming for scalability.
+该模块实现事件驱动架构，允许系统的不同部分发布和订阅事件。它支持内存和基于 Redis 的事件流，以实现可扩展性。
 
-## Features
+## 功能特性
 
-- Event publishing and subscription
-- Multiple backend support (in-memory, Redis)
-- Event filtering and routing
-- Stream management
-- Event retention and cleanup
-- Type-safe event handling
+- 事件发布和订阅
+- 多后端支持（内存、Redis）
+- 事件过滤和路由
+- 流管理
+- 事件保留和清理
+- 类型安全的事件处理
 
-## Event Modes
+## 事件模式
 
-- **InMemory**: For single-instance deployments or development
-- **Redis**: For distributed deployments with multiple instances
+- **InMemory**：用于单实例部署或开发
+- **Redis**：用于多实例的分布式部署
 
-## Key Components
+## 核心组件
 
-### Event[T]
-Generic event wrapper containing:
-- Event ID
-- Timestamp
-- Typed payload
+### Event[T]（事件）
+通用事件包装器，包含：
+- 事件 ID
+- 时间戳
+- 类型化的有效负载
 
-### Reader/Reporter
-- **Reader**: Subscribes to and processes events
-- **Reporter**: Publishes events to the system
+### Reader/Reporter（读取器/报告器）
+- **Reader**：订阅和处理事件
+- **Reporter**：向系统发布事件
 
-## Configuration
+## 配置
 
 ```go
 config := events.Config{
@@ -43,31 +43,31 @@ config := events.Config{
 }
 ```
 
-## Usage
+## 使用示例
 
 ```go
-// Create a reporter (publisher)
+// 创建报告器（发布者）
 reporter := events.NewReporter(config)
 
-// Publish an event
+// 发布事件
 err := reporter.Report(ctx, event)
 
-// Create a reader (subscriber)
+// 创建读取器（订阅者）
 reader := events.NewReader(config)
 
-// Subscribe to events
+// 订阅事件
 err := reader.Subscribe(ctx, category, eventType, handler)
 ```
 
-## Use Cases
+## 使用场景
 
-- Real-time notifications
-- Activity feeds
-- Audit event distribution
-- Webhook triggers
-- System monitoring
-- Integration points
+- 实时通知
+- 活动动态
+- 审计事件分发
+- Webhook 触发器
+- 系统监控
+- 集成点
 
-## License
+## 许可证
 
 Apache License 2.0

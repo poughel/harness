@@ -1,57 +1,57 @@
-# Cache Module
+# Cache 模块
 
-The `cache` module provides a flexible caching abstraction with support for multiple cache implementations.
+`cache` 模块提供灵活的缓存抽象，支持多种缓存实现。
 
-## Overview
+## 概述
 
-This module offers a generic cache interface with support for both simple key-value caching and extended caching with batch operations. It includes implementations for in-memory caching, TTL-based caching, and Redis-based distributed caching.
+该模块提供通用缓存接口，支持简单的键值缓存和具有批量操作的扩展缓存。它包括内存缓存、基于 TTL 的缓存和基于 Redis 的分布式缓存的实现。
 
-## Cache Implementations
+## 缓存实现
 
-- **NoCache**: A pass-through implementation that bypasses caching
-- **TTLCache**: In-memory cache with time-to-live expiration
-- **RedisCache**: Distributed cache using Redis
+- **NoCache**：绕过缓存的直通实现
+- **TTLCache**：具有生存时间过期的内存缓存
+- **RedisCache**：使用 Redis 的分布式缓存
 
-## Key Interfaces
+## 核心接口
 
-### Cache[K, V]
-Basic cache interface providing:
-- `Get`: Retrieve a value by key
-- `Evict`: Remove a value from cache
-- `Stats`: Get cache statistics (hits, misses)
+### Cache[K, V]（缓存）
+基本缓存接口提供：
+- `Get`：通过键检索值
+- `Evict`：从缓存中删除值
+- `Stats`：获取缓存统计信息（命中、未命中）
 
-### ExtendedCache[K, V]
-Extended interface with additional operations:
-- `Map`: Batch retrieve multiple values by keys
+### ExtendedCache[K, V]（扩展缓存）
+具有额外操作的扩展接口：
+- `Map`：按键批量检索多个值
 
-### Getter[K, V]
-Data source interface:
-- `Find`: Retrieve a value from the underlying data source
+### Getter[K, V]（获取器）
+数据源接口：
+- `Find`：从底层数据源检索值
 
-## Usage
+## 使用示例
 
 ```go
-// Create a cache with a getter
+// 使用 getter 创建缓存
 cache := cache.NewTTLCache(getter, ttl, maxSize)
 
-// Get a value (cache miss will call getter)
+// 获取值（缓存未命中会调用 getter）
 value, err := cache.Get(ctx, key)
 
-// Evict a value
+// 清除值
 cache.Evict(ctx, key)
 
-// Get cache statistics
+// 获取缓存统计信息
 hits, misses := cache.Stats()
 ```
 
-## Features
+## 功能特性
 
-- Generic type support for type-safe caching
-- Automatic cache population on miss
-- Batch operations for efficient multi-key retrieval
-- Statistics tracking
-- Configurable TTL and size limits
+- 泛型类型支持，用于类型安全的缓存
+- 缓存未命中时自动填充
+- 批量操作，实现高效的多键检索
+- 统计跟踪
+- 可配置的 TTL 和大小限制
 
-## License
+## 许可证
 
 Apache License 2.0

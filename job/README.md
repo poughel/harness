@@ -1,76 +1,76 @@
-# Job Module
+# Job 模块
 
-The `job` module provides a background job scheduling and execution framework.
+`job` 模块提供后台作业调度和执行框架。
 
-## Overview
+## 概述
 
-This module implements a robust job scheduler that handles recurring and one-time background tasks. It supports distributed execution, job persistence, and automatic retry mechanisms.
+该模块实现了一个健壮的作业调度器，处理定期和一次性的后台任务。它支持分布式执行、作业持久化和自动重试机制。
 
-## Features
+## 功能特性
 
-- Cron-based job scheduling
-- One-time and recurring jobs
-- Distributed job execution
-- Job persistence and recovery
-- Automatic retry with backoff
-- Job locking to prevent duplicates
-- Job lifecycle management
-- Job history and retention
+- 基于 Cron 的作业调度
+- 一次性和定期作业
+- 分布式作业执行
+- 作业持久化和恢复
+- 带退避的自动重试
+- 作业锁定以防止重复
+- 作业生命周期管理
+- 作业历史和保留
 
-## Key Components
+## 核心组件
 
-### Scheduler
-- Manages job registration and execution
-- Handles job triggers and timing
-- Coordinates job distribution across instances
-- Implements job locking mechanisms
+### Scheduler（调度器）
+- 管理作业注册和执行
+- 处理作业触发器和定时
+- 协调跨实例的作业分发
+- 实现作业锁定机制
 
-### Executor
-- Executes job handlers
-- Manages job concurrency
-- Handles job timeouts
-- Implements retry logic
+### Executor（执行器）
+- 执行作业处理器
+- 管理作业并发
+- 处理作业超时
+- 实现重试逻辑
 
-### Store
-- Persists job definitions and state
-- Tracks job execution history
-- Manages job retention policies
+### Store（存储）
+- 持久化作业定义和状态
+- 跟踪作业执行历史
+- 管理作业保留策略
 
-## Usage
+## 使用示例
 
 ```go
-// Define a job
+// 定义作业
 job := job.Definition{
     UID: "my-job",
     Type: "cleanup",
-    Cron: "0 0 * * *", // Daily at midnight
+    Cron: "0 0 * * *", // 每天午夜
     MaxRetries: 3,
 }
 
-// Register a job handler
+// 注册作业处理器
 scheduler.Register(job, func(ctx context.Context) error {
-    // Job implementation
+    // 作业实现
     return performCleanup(ctx)
 })
 
-// Start the scheduler
+// 启动调度器
 err := scheduler.Start(ctx)
 
-// Trigger a job manually
+// 手动触发作业
 err := scheduler.Trigger(ctx, jobUID)
 ```
 
-## Job Types
+## 作业类型
 
-The module supports various built-in job types:
-- Repository cleanup and maintenance
-- Log retention and archival
-- Metric aggregation
-- System health checks
-- Data synchronization
-- Custom application jobs
+该模块支持各种内置作业类型：
+- 代码仓库清理和维护
+- 日志保留和归档
+- 指标聚合
+- 系统健康检查
+- 数据同步
+- 自定义应用程序作业
 
-## Configuration
+## 配置
 
 ```go
 config := job.Config{
@@ -80,14 +80,14 @@ config := job.Config{
 }
 ```
 
-## Distribution
+## 分布
 
-In multi-instance deployments:
-- Jobs are distributed using distributed locks
-- Only one instance executes a job at a time
-- Failed jobs can be picked up by other instances
-- State is shared via persistent storage
+在多实例部署中：
+- 作业使用分布式锁进行分发
+- 一次只有一个实例执行作业
+- 失败的作业可以被其他实例接管
+- 状态通过持久存储共享
 
-## License
+## 许可证
 
 Apache License 2.0

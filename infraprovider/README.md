@@ -1,70 +1,70 @@
-# Infraprovider Module
+# Infraprovider 模块
 
-The `infraprovider` module provides infrastructure provisioning and management capabilities for Gitspaces.
+`infraprovider` 模块为 Gitspaces 提供基础设施配置和管理功能。
 
-## Overview
+## 概述
 
-This module handles the provisioning and management of development environments (Gitspaces) across different infrastructure providers. It abstracts the infrastructure layer, allowing Gitspaces to run on various platforms.
+该模块处理跨不同基础设施提供商的开发环境（Gitspaces）的配置和管理。它抽象了基础设施层，允许 Gitspaces 在各种平台上运行。
 
-## Features
+## 功能特性
 
-- Infrastructure provider abstraction
-- Gitspace environment provisioning
-- Resource lifecycle management
-- Multi-cloud support
-- Infrastructure state tracking
-- Resource cleanup and teardown
+- 基础设施提供商抽象
+- Gitspace 环境配置
+- 资源生命周期管理
+- 多云支持
+- 基础设施状态跟踪
+- 资源清理和拆除
 
-## Supported Providers
+## 支持的提供商
 
-The module is designed to support multiple infrastructure providers:
-- Docker (local and remote)
+该模块旨在支持多个基础设施提供商：
+- Docker（本地和远程）
 - Kubernetes
-- Cloud providers (AWS, GCP, Azure)
-- Custom infrastructure providers
+- 云提供商（AWS、GCP、Azure）
+- 自定义基础设施提供商
 
-## Key Responsibilities
+## 主要职责
 
-- Creating development environments
-- Managing environment lifecycle
-- Allocating and deallocating resources
-- Network and storage configuration
-- Environment state monitoring
-- Resource quota management
+- 创建开发环境
+- 管理环境生命周期
+- 分配和释放资源
+- 网络和存储配置
+- 环境状态监控
+- 资源配额管理
 
-## Usage
+## 使用示例
 
 ```go
-// Provision a new Gitspace
+// 配置新的 Gitspace
 gitspace, err := provider.Provision(ctx, config)
 
-// Get Gitspace status
+// 获取 Gitspace 状态
 status, err := provider.GetStatus(ctx, gitspaceID)
 
-// Stop a Gitspace
+// 停止 Gitspace
 err = provider.Stop(ctx, gitspaceID)
 
-// Delete a Gitspace
+// 删除 Gitspace
 err = provider.Delete(ctx, gitspaceID)
 ```
 
-## Configuration
+## 配置
 
-Provider configuration includes:
-- Provider type and credentials
-- Resource limits (CPU, memory, storage)
-- Network settings
-- Image and runtime specifications
-- Timeout and retry settings
+提供商配置包括：
+- 提供商类型和凭据
+- 资源限制（CPU、内存、存储）
+- 网络设置
+- 镜像和运行时规范
+- 超时和重试设置
 
-## Resource Management
+## 资源管理
 
-- Automatic resource allocation
-- Efficient resource utilization
-- Cleanup of unused resources
-- Cost optimization
-- Resource pooling where applicable
+- 自动资源分配
+- 高效的资源利用
+- 清理未使用的资源
+- 成本优化
+- 适用的资源池
 
-## License
+## 许可证
 
 Apache License 2.0

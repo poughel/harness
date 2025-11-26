@@ -1,90 +1,90 @@
-# Secret Module
+# Secret 模块
 
-The `secret` module provides secret management and decryption services for the Harness application.
+`secret` 模块为 Harness 应用程序提供密钥管理和解密服务。
 
-## Overview
+## 概述
 
-This module handles the secure storage and retrieval of secrets used in pipelines, integrations, and other parts of the system. It provides a service interface for decrypting secrets in the context of a specific space.
+该模块处理流水线、集成和系统其他部分中使用的密钥的安全存储和检索。它提供在特定空间上下文中解密密钥的服务接口。
 
-## Features
+## 功能特性
 
-- Secure secret storage
-- Space-scoped secret access
-- Secret decryption service
-- Integration with pipeline execution
-- Secret lifecycle management
-- Access control enforcement
+- 安全密钥存储
+- 空间范围的密钥访问
+- 密钥解密服务
+- 与流水线执行集成
+- 密钥生命周期管理
+- 访问控制强制执行
 
-## Key Interface
+## 核心接口
 
-### Service
-The main interface providing:
-- `DecryptSecret`: Decrypt a secret by identifier within a space context
+### Service（服务）
+主接口提供：
+- `DecryptSecret`：在空间上下文中通过标识符解密密钥
 
-## Usage
+## 使用示例
 
 ```go
-// Create secret service
+// 创建密钥服务
 secretService := secret.NewService(...)
 
-// Decrypt a secret
+// 解密密钥
 plaintext, err := secretService.DecryptSecret(
     ctx,
-    "/root/my-project",  // space path
-    "my-secret-id",       // secret identifier
+    "/root/my-project",  // 空间路径
+    "my-secret-id",       // 密钥标识符
 )
 if err != nil {
     return err
 }
 
-// Use decrypted secret
-// (e.g., in pipeline, API calls, etc.)
+// 使用解密的密钥
+// （例如，在流水线、API 调用等中）
 ```
 
-## Security Considerations
+## 安全注意事项
 
-- Secrets are encrypted at rest
-- Decryption requires proper authorization
-- Space-based access control
-- Secrets are never logged or exposed in error messages
-- Temporary decryption in memory only
-- No caching of decrypted values
+- 密钥静态加密
+- 解密需要适当的授权
+- 基于空间的访问控制
+- 密钥永远不会记录或在错误消息中暴露
+- 仅在内存中临时解密
+- 不缓存解密值
 
-## Use Cases
+## 使用场景
 
-- Pipeline secret variables
-- Integration credentials (Git, cloud providers)
-- API tokens and keys
-- Database passwords
-- SSH keys
-- Webhook secrets
-- Third-party service credentials
+- 流水线密钥变量
+- 集成凭据（Git、云提供商）
+- API 令牌和密钥
+- 数据库密码
+- SSH 密钥
+- Webhook 密钥
+- 第三方服务凭据
 
-## Integration
+## 集成
 
-The secret service integrates with:
-- Pipeline execution engine
-- Encryption module for secure storage
-- Authorization system for access control
-- Audit logging for secret access tracking
+密钥服务与以下集成：
+- 流水线执行引擎
+- 加密模块用于安全存储
+- 授权系统用于访问控制
+- 审计日志用于密钥访问跟踪
 
-## Best Practices
+## 最佳实践
 
-- Use specific secret identifiers
-- Grant minimal required access
-- Rotate secrets regularly
-- Use space-scoped secrets for better isolation
-- Never log or print decrypted secrets
-- Handle decryption errors appropriately
+- 使用特定的密钥标识符
+- 授予所需的最小访问权限
+- 定期轮换密钥
+- 使用空间范围的密钥以实现更好的隔离
+- 永远不要记录或打印解密的密钥
+- 适当处理解密错误
 
-## Secret Types
+## 密钥类型
 
-Supports various secret formats:
-- Simple text secrets
-- Key-value pairs
-- File secrets (certificates, keys)
-- SSH keys
+支持各种密钥格式：
+- 简单文本密钥
+- 键值对
+- 文件密钥（证书、密钥）
+- SSH 密钥
 
-## License
+## 许可证
 
 Apache License 2.0

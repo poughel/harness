@@ -1,147 +1,147 @@
-# App Module
+# App 模块
 
-The `app` module contains the main application logic and orchestration for the Harness application.
+`app` 模块包含 Harness 应用程序的主应用程序逻辑和编排。
 
-## Overview
+## 概述
 
-This module serves as the core application layer, bringing together all other modules and providing the main business logic, API handlers, and service implementations. It acts as the glue between different components of the system.
+该模块作为核心应用程序层，将所有其他模块整合在一起，并提供主业务逻辑、API 处理器和服务实现。它充当系统不同组件之间的粘合剂。
 
-## Structure
+## 结构
 
-The app module is organized into several sub-packages:
+app 模块组织为多个子包：
 
-- **api**: HTTP API handlers and routes
-- **auth**: Authentication and authorization logic
-- **bootstrap**: Application initialization and setup
-- **config**: Application configuration management
-- **connector**: External system connectors
-- **cron**: Scheduled task definitions
-- **events**: Event handlers and processors
-- **githook**: Git hook implementations
-- **gitspace**: Gitspace (dev environment) management
-- **jwt**: JWT token handling
-- **paths**: Path utilities and resolvers
-- **pipeline**: Pipeline execution and management
-- **request**: Request context and utilities
-- **router**: HTTP router setup
-- **server**: HTTP server implementation
-- **services**: Business logic services
-- **sse**: Server-Sent Events implementation
-- **store**: Store layer integration
-- **testing**: Testing utilities
-- **token**: Token management
-- **url**: URL building and parsing utilities
+- **api**：HTTP API 处理器和路由
+- **auth**：身份验证和授权逻辑
+- **bootstrap**：应用程序初始化和设置
+- **config**：应用程序配置管理
+- **connector**：外部系统连接器
+- **cron**：计划任务定义
+- **events**：事件处理器和处理器
+- **githook**：Git 钩子实现
+- **gitspace**：Gitspace（开发环境）管理
+- **jwt**：JWT 令牌处理
+- **paths**：路径实用工具和解析器
+- **pipeline**：流水线执行和管理
+- **request**：请求上下文和实用工具
+- **router**：HTTP 路由器设置
+- **server**：HTTP 服务器实现
+- **services**：业务逻辑服务
+- **sse**：服务器发送事件实现
+- **store**：存储层集成
+- **testing**：测试实用工具
+- **token**：令牌管理
+- **url**：URL 构建和解析实用工具
 
-## Key Components
+## 核心组件
 
-### API Handlers
-HTTP endpoint implementations for:
-- Repository management
-- Pull requests
-- Pipelines
-- Users and authentication
+### API 处理器
+HTTP 端点实现，用于：
+- 代码仓库管理
+- 拉取请求
+- 流水线
+- 用户和身份验证
 - Webhooks
-- Registry operations
-- And more...
+- 镜像仓库操作
+- 等等...
 
-### Services
-Business logic layer providing:
-- Repository operations
-- Pull request workflows
-- Pipeline execution
-- User management
-- Permission checking
-- Webhook delivery
-- And more...
+### 服务
+业务逻辑层提供：
+- 代码仓库操作
+- 拉取请求工作流
+- 流水线执行
+- 用户管理
+- 权限检查
+- Webhook 传递
+- 等等...
 
-### Server
-- HTTP server setup
-- Middleware chain
-- Route registration
-- Graceful shutdown
-- Health checks
+### 服务器
+- HTTP 服务器设置
+- 中间件链
+- 路由注册
+- 优雅关闭
+- 健康检查
 
-### Authentication
-- User authentication
-- Token validation
-- Session management
-- Authorization checks
-- Permission evaluation
+### 身份验证
+- 用户身份验证
+- 令牌验证
+- 会话管理
+- 授权检查
+- 权限评估
 
-## Application Flow
+## 应用程序流程
 
-1. **Bootstrap**: Initialize configuration, database, and services
-2. **Server Setup**: Configure HTTP server and routes
-3. **Request Handling**: Process incoming HTTP requests
-4. **Business Logic**: Execute service methods
-5. **Response**: Return results to client
+1. **Bootstrap**：初始化配置、数据库和服务
+2. **Server Setup**：配置 HTTP 服务器和路由
+3. **Request Handling**：处理传入的 HTTP 请求
+4. **Business Logic**：执行服务方法
+5. **Response**：向客户端返回结果
 
-## Configuration
+## 配置
 
-The app module manages configuration from various sources:
-- Environment variables
-- Configuration files
-- Command-line flags
-- Default values
+app 模块管理来自各种来源的配置：
+- 环境变量
+- 配置文件
+- 命令行标志
+- 默认值
 
-## Usage
+## 使用示例
 
 ```go
-// Bootstrap application
+// 引导应用程序
 config := app.LoadConfig()
 app, err := app.New(config)
 if err != nil {
     log.Fatal(err)
 }
 
-// Start server
+// 启动服务器
 err = app.Run()
 if err != nil {
     log.Fatal(err)
 }
 ```
 
-## Dependency Injection
+## 依赖注入
 
-Uses Google Wire for dependency injection:
-- Automatic dependency resolution
-- Type-safe wiring
-- Clear dependency graphs
-- Easy testing with mocks
+使用 Google Wire 进行依赖注入：
+- 自动依赖解析
+- 类型安全的装配
+- 清晰的依赖图
+- 使用模拟轻松测试
 
-## Middleware
+## 中间件
 
-Common middleware applied:
-- Authentication
-- Authorization
-- Request logging
-- Error recovery
-- CORS handling
-- Rate limiting
-- Request ID injection
+应用的常见中间件：
+- 身份验证
+- 授权
+- 请求日志
+- 错误恢复
+- CORS 处理
+- 速率限制
+- 请求 ID 注入
 
-## API Versioning
+## API 版本控制
 
-APIs are versioned:
-- `/api/v1/...`: Version 1 endpoints
-- Supports multiple API versions
-- Backward compatibility
+API 进行版本控制：
+- `/api/v1/...`：版本 1 端点
+- 支持多个 API 版本
+- 向后兼容性
 
-## Error Handling
+## 错误处理
 
-Standardized error handling:
-- HTTP status code mapping
-- Consistent error response format
-- Error logging
-- User-friendly error messages
+标准化的错误处理：
+- HTTP 状态码映射
+- 一致的错误响应格式
+- 错误日志
+- 用户友好的错误消息
 
-## Health Checks
+## 健康检查
 
-Provides health check endpoints:
-- `/healthz`: Liveness check
-- `/readyz`: Readiness check
-- Component health status
+提供健康检查端点：
+- `/healthz`：存活检查
+- `/readyz`：就绪检查
+- 组件健康状态
 
-## License
+## 许可证
 
 Apache License 2.0

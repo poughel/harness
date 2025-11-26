@@ -1,55 +1,55 @@
-# CLI Module
+# CLI 模块
 
-The `cli` module provides command-line interface functionality for the Harness application.
+`cli` 模块为 Harness 应用提供命令行界面功能。
 
-## Overview
+## 概述
 
-This module contains the implementation of the command-line tool that allows users to interact with the Harness system from the terminal. It provides various operations for managing repositories, pipelines, users, and other resources.
+该模块包含命令行工具的实现，允许用户从终端与 Harness 系统交互。它提供用于管理代码仓库、流水线、用户和其他资源的各种操作。
 
-## Structure
+## 结构
 
-The module is organized into several sub-packages:
+该模块组织为多个子包：
 
-- **operations**: Contains implementations of CLI commands and operations
-- **provide**: Dependency injection providers for CLI components
-- **session**: Session management and authentication
-- **textui**: Text-based user interface components and formatters
+- **operations**：包含 CLI 命令和操作的实现
+- **provide**：CLI 组件的依赖注入提供者
+- **session**：会话管理和身份验证
+- **textui**：基于文本的用户界面组件和格式化器
 
-## Key Features
+## 主要功能
 
-- User authentication and session management
-- Repository operations
-- Pipeline management
-- User and token management
-- Interactive and non-interactive modes
-- Formatted output (tables, JSON, etc.)
+- 用户身份验证和会话管理
+- 代码仓库操作
+- 流水线管理
+- 用户和令牌管理
+- 交互式和非交互式模式
+- 格式化输出（表格、JSON 等）
 
-## Usage
+## 使用示例
 
-The CLI is typically built as part of the main `gitness` binary:
+CLI 通常作为主 `gitness` 二进制文件的一部分构建：
 
 ```bash
-# Login to Harness
+# 登录到 Harness
 ./gitness login
 
-# Create a personal access token
+# 创建个人访问令牌
 ./gitness user pat "my-pat-uid" 2592000
 
-# List repositories
+# 列出代码仓库
 ./gitness repo list
 
-# View help
+# 查看帮助
 ./gitness --help
 ```
 
-## Components
+## 组件
 
-- Command parsing and routing
-- HTTP client for API communication
-- Output formatting and pretty printing
-- Progress indicators and status messages
-- Error handling and user-friendly messages
+- 命令解析和路由
+- 用于 API 通信的 HTTP 客户端
+- 输出格式化和美化打印
+- 进度指示器和状态消息
+- 错误处理和用户友好的消息
 
-## License
+## 许可证
 
 Apache License 2.0

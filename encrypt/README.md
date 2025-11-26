@@ -1,50 +1,50 @@
-# Encrypt Module
+# Encrypt 模块
 
-The `encrypt` module provides field-level encryption and decryption for sensitive data.
+`encrypt` 模块为敏感数据提供字段级加密和解密。
 
-## Overview
+## 概述
 
-This module offers an abstraction for encrypting and decrypting string values, supporting multiple encryption algorithms. It's primarily used for protecting sensitive configuration values and secrets at rest.
+该模块提供加密和解密字符串值的抽象，支持多种加密算法。它主要用于保护静态的敏感配置值和密钥。
 
-## Encryption Algorithms
+## 加密算法
 
-- **AESGCM**: AES encryption in Galois/Counter Mode (authenticated encryption)
-- **None**: Pass-through implementation for development/testing
+- **AESGCM**：Galois/Counter 模式的 AES 加密（认证加密）
+- **None**：用于开发/测试的直通实现
 
-## Key Interface
+## 核心接口
 
-### Encrypter
-The main interface providing:
-- `Encrypt(plaintext string) ([]byte, error)`: Encrypts a string value
-- `Decrypt(ciphertext []byte) (string, error)`: Decrypts encrypted data
+### Encrypter（加密器）
+主接口提供：
+- `Encrypt(plaintext string) ([]byte, error)`：加密字符串值
+- `Decrypt(ciphertext []byte) (string, error)`：解密加密数据
 
-## Usage
+## 使用示例
 
 ```go
-// Create an encrypter with a 32-byte key
+// 使用 32 字节密钥创建加密器
 encrypter, err := encrypt.NewAESGCM(encryptionKey)
 
-// Encrypt sensitive data
+// 加密敏感数据
 ciphertext, err := encrypter.Encrypt("sensitive-value")
 
-// Decrypt data
+// 解密数据
 plaintext, err := encrypter.Decrypt(ciphertext)
 ```
 
-## Security Notes
+## 安全注意事项
 
-- Requires a 32-byte encryption key for AESGCM
-- Ciphertext includes authentication tag for integrity verification
-- Each encryption uses a unique nonce
-- Keys should be stored securely and never committed to version control
+- AESGCM 需要 32 字节的加密密钥
+- 密文包含用于完整性验证的认证标签
+- 每次加密使用唯一的随机数
+- 密钥应安全存储，永远不要提交到版本控制
 
-## Use Cases
+## 使用场景
 
-- Database field encryption
-- Configuration secret protection
-- Credential storage
-- API token encryption
+- 数据库字段加密
+- 配置密钥保护
+- 凭据存储
+- API 令牌加密
 
-## License
+## 许可证
 
 Apache License 2.0

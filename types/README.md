@@ -1,57 +1,57 @@
-# Types Module
+# Types 模块
 
-The `types` module contains common type definitions and data structures used throughout the Harness application.
+`types` 模块包含整个 Harness 应用程序中使用的通用类型定义和数据结构。
 
-## Overview
+## 概述
 
-This module defines core domain types, enums, and data structures that are shared across different modules. It provides a central location for type definitions to ensure consistency and avoid circular dependencies.
+该模块定义在不同模块之间共享的核心领域类型、枚举和数据结构。它提供类型定义的中心位置，以确保一致性并避免循环依赖。
 
-## Key Type Categories
+## 主要类型类别
 
-### Core Entities
-- **Repository**: Git repository metadata
-- **Space**: Project/namespace containers
-- **Principal**: User and service account representation
-- **Pipeline**: CI/CD pipeline definitions
-- **PullRequest**: Pull request data structures
-- **Webhook**: Webhook configurations
+### 核心实体
+- **Repository**：Git 代码仓库元数据
+- **Space**：项目/命名空间容器
+- **Principal**：用户和服务帐户表示
+- **Pipeline**：CI/CD 流水线定义
+- **PullRequest**：拉取请求数据结构
+- **Webhook**：Webhook 配置
 
-### Execution Types
-- **Execution**: Pipeline execution instances
-- **Stage**: Pipeline stage definitions
-- **Step**: Individual step in a stage
-- **Log**: Build and execution logs
+### 执行类型
+- **Execution**：流水线执行实例
+- **Stage**：流水线阶段定义
+- **Step**：阶段中的单个步骤
+- **Log**：构建和执行日志
 
-### Registry Types
-- **Image**: Container image metadata
-- **Artifact**: Registry artifact information
-- **Tag**: Image tags
-- **Manifest**: Image manifests
+### 镜像仓库类型
+- **Image**：容器镜像元数据
+- **Artifact**：镜像仓库制品信息
+- **Tag**：镜像标签
+- **Manifest**：镜像清单
 
-### Authentication Types
-- **Token**: API tokens and credentials
-- **Session**: User sessions
-- **PublicKey**: SSH public keys
+### 身份验证类型
+- **Token**：API 令牌和凭据
+- **Session**：用户会话
+- **PublicKey**：SSH 公钥
 
-### Enums
-Located in the `enum` sub-package:
-- Repository states
-- Pull request states
-- Pipeline triggers
-- Webhook events
-- User roles and permissions
-- And more...
+### 枚举
+位于 `enum` 子包中：
+- 代码仓库状态
+- 拉取请求状态
+- 流水线触发器
+- Webhook 事件
+- 用户角色和权限
+- 等等...
 
-## Structure
+## 结构
 
-The module includes:
-- **check**: Validation utilities and checkers
-- **enum**: Enumeration definitions
-- Main type definitions in the root
+该模块包括：
+- **check**：验证实用工具和检查器
+- **enum**：枚举定义
+- 根目录中的主类型定义
 
-## Common Types
+## 常见类型
 
-### Repository
+### Repository（代码仓库）
 ```go
 type Repository struct {
     ID          int64
@@ -64,11 +64,11 @@ type Repository struct {
     CreatedBy   int64
     Created     int64
     Updated     int64
-    // ... additional fields
+    // ... 其他字段
 }
 ```
 
-### Principal
+### Principal（主体）
 ```go
 type Principal struct {
     ID          int64
@@ -76,11 +76,11 @@ type Principal struct {
     Email       string
     DisplayName string
     Admin       bool
-    // ... additional fields
+    // ... 其他字段
 }
 ```
 
-### PullRequest
+### PullRequest（拉取请求）
 ```go
 type PullRequest struct {
     ID              int64
@@ -94,54 +94,54 @@ type PullRequest struct {
     TargetRepoID    int64
     TargetBranch    string
     Author          Principal
-    // ... additional fields
+    // ... 其他字段
 }
 ```
 
-## Usage
+## 使用示例
 
 ```go
 import "github.com/harness/gitness/types"
 
-// Create a repository
+// 创建代码仓库
 repo := &types.Repository{
     Identifier: "my-repo",
     Path: "/space/my-repo",
     IsPublic: true,
 }
 
-// Use enums
+// 使用枚举
 if pr.State == types.PullReqStateOpen {
-    // Process open pull request
+    // 处理打开的拉取请求
 }
 
-// Use validation
+// 使用验证
 err := types.ValidateIdentifier(identifier)
 ```
 
-## Validation
+## 验证
 
-Many types include validation methods:
-- Identifier format validation
-- Field length checks
-- Required field validation
-- Business rule validation
+许多类型包括验证方法：
+- 标识符格式验证
+- 字段长度检查
+- 必填字段验证
+- 业务规则验证
 
-## JSON Serialization
+## JSON 序列化
 
-Types are designed for JSON serialization:
-- Proper JSON tags
-- Omitempty for optional fields
-- Custom marshaling where needed
+类型设计用于 JSON 序列化：
+- 适当的 JSON 标签
+- 可选字段的 omitempty
+- 需要时的自定义编组
 
-## Best Practices
+## 最佳实践
 
-- Use defined types instead of primitives
-- Validate inputs using type methods
-- Use enums for fixed value sets
-- Embed common fields (timestamps, IDs) consistently
-- Keep types focused and cohesive
+- 使用定义的类型而不是基元
+- 使用类型方法验证输入
+- 对固定值集使用枚举
+- 一致地嵌入通用字段（时间戳、ID）
+- 保持类型专注和内聚
 
-## License
+## 许可证
 
 Apache License 2.0

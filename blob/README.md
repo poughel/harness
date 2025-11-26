@@ -1,44 +1,44 @@
-# Blob Module
+# Blob 模块
 
-The `blob` module provides an abstraction layer for blob storage operations, supporting multiple storage backends.
+`blob` 模块为二进制大对象存储操作提供抽象层，支持多种存储后端。
 
-## Overview
+## 概述
 
-This module offers a unified interface for storing and retrieving binary large objects (blobs) across different storage providers. It supports both local filesystem storage and cloud storage solutions.
+该模块为跨不同存储提供商的二进制大对象（blobs）的存储和检索提供统一接口。它支持本地文件系统存储和云存储解决方案。
 
-## Supported Storage Backends
+## 支持的存储后端
 
-- **Filesystem**: Local file system storage
-- **Google Cloud Storage (GCS)**: Cloud-based object storage
+- **Filesystem**：本地文件系统存储
+- **Google Cloud Storage (GCS)**：基于云的对象存储
 
-## Key Interfaces
+## 核心接口
 
-### Store
-The main interface providing:
-- `Upload`: Upload a file to blob storage
-- `Download`: Download a file from blob storage
-- `GetSignedURL`: Generate time-limited signed URLs for secure file access
+### Store（存储）
+主接口提供：
+- `Upload`：上传文件到 blob 存储
+- `Download`：从 blob 存储下载文件
+- `GetSignedURL`：生成有时限的签名 URL，用于安全访问文件
 
-## Usage
+## 使用示例
 
 ```go
-// Upload a file
+// 上传文件
 err := store.Upload(ctx, fileReader, "path/to/file")
 
-// Download a file
+// 下载文件
 reader, err := store.Download(ctx, "path/to/file")
 
-// Get a signed URL
+// 获取签名 URL
 url, err := store.GetSignedURL(ctx, "path/to/file", expireTime)
 ```
 
-## Configuration
+## 配置
 
-The module uses a configuration system to specify:
-- Storage provider type
-- Provider-specific settings (paths, credentials, etc.)
-- Upload/download options
+该模块使用配置系统来指定：
+- 存储提供商类型
+- 提供商特定的设置（路径、凭证等）
+- 上传/下载选项
 
-## License
+## 许可证
 
 Apache License 2.0

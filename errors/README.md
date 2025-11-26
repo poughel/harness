@@ -1,62 +1,62 @@
-# Errors Module
+# Errors 模块
 
-The `errors` module provides standardized error handling and error types for the Harness application.
+`errors` 模块为 Harness 应用程序提供标准化的错误处理和错误类型。
 
-## Overview
+## 概述
 
-This module defines common error types, error creation utilities, and error handling patterns used throughout the application. It provides structured errors with additional context for better debugging and user experience.
+该模块定义应用程序中使用的通用错误类型、错误创建实用工具和错误处理模式。它提供带有额外上下文的结构化错误，以便更好地调试和改善用户体验。
 
-## Features
+## 功能特性
 
-- Standardized error types and codes
-- Error wrapping and context
-- HTTP status code mapping
-- User-friendly error messages
-- Error classification (not found, validation, authorization, etc.)
+- 标准化的错误类型和代码
+- 错误包装和上下文
+- HTTP 状态码映射
+- 用户友好的错误消息
+- 错误分类（未找到、验证、授权等）
 
-## Common Error Types
+## 常见错误类型
 
-- `NotFoundError`: Resource not found errors
-- `ValidationError`: Input validation failures
-- `UnauthorizedError`: Authentication failures
-- `ForbiddenError`: Authorization failures
-- `ConflictError`: Resource conflicts
-- `InternalError`: Internal server errors
+- `NotFoundError`：资源未找到错误
+- `ValidationError`：输入验证失败
+- `UnauthorizedError`：身份验证失败
+- `ForbiddenError`：授权失败
+- `ConflictError`：资源冲突
+- `InternalError`：内部服务器错误
 
-## Usage
+## 使用示例
 
 ```go
-// Create a not found error
+// 创建未找到错误
 err := errors.NotFound("repository not found")
 
-// Create a validation error
+// 创建验证错误
 err := errors.InvalidArgument("invalid repository name")
 
-// Wrap an error with context
+// 使用上下文包装错误
 err := errors.Wrap(originalErr, "failed to create repository")
 
-// Check error type
+// 检查错误类型
 if errors.IsNotFound(err) {
-    // Handle not found case
+    // 处理未找到的情况
 }
 ```
 
-## Error Information
+## 错误信息
 
-Errors can include:
-- Error code/type
-- User-facing message
-- Internal error details
-- Stack trace (in development)
-- HTTP status code mapping
+错误可以包括：
+- 错误代码/类型
+- 面向用户的消息
+- 内部错误详情
+- 堆栈跟踪（在开发中）
+- HTTP 状态码映射
 
-## Best Practices
+## 最佳实践
 
-- Use specific error types for different failure scenarios
-- Include context when wrapping errors
-- Provide actionable error messages to users
-- Log detailed error information for debugging
+- 对不同的失败场景使用特定的错误类型
+- 在包装错误时包含上下文
+- 向用户提供可操作的错误消息
+- 记录详细的错误信息以便调试
 
-## License
+## 许可证
 
 Apache License 2.0
