@@ -86,8 +86,12 @@
   - `branch_change_target.go` - 更改目标分支
   - `branch_delete.go` - 删除分支
   - `branch_restore.go` - 恢复分支
-  - `file_view_*.go` - 文件查看管理
-  - `label_*.go` - 标签管理
+  - `file_view_add.go` - 添加文件查看
+  - `file_view_delete.go` - 删除文件查看
+  - `file_view_list.go` - 列出文件查看
+  - `label_assign.go` - 分配标签
+  - `label_unassign.go` - 取消分配标签
+  - `label_list.go` - 列出标签
 
 #### 项目与空间控制器
 - **space/** - 空间（项目）管理
@@ -168,7 +172,10 @@
   - `delete_token.go` - 删除令牌
   - `list_tokens.go` - 列出令牌
   - `membership_spaces.go` - 成员空间
-  - `publickey_*.go` - SSH 公钥管理
+  - `publickey_create.go` - 创建 SSH 公钥
+  - `publickey_delete.go` - 删除 SSH 公钥
+  - `publickey_edit.go` - 编辑 SSH 公钥
+  - `publickey_list.go` - 列出 SSH 公钥
   - `create_favorite.go` - 创建收藏
   - `delete_favorite.go` - 删除收藏
 
@@ -271,10 +278,18 @@
   - `search.go` - 执行搜索
 
 - **check/** - 检查管理
-  - 检查和验证相关功能
+  - 代码质量检查
+  - 安全扫描结果
+  - 构建状态检查
 
 - **service/** - 服务管理
-  - 服务相关操作
+  - 服务帐户操作
+  - 服务配置管理
+  - 服务状态监控
+
+- **limiter/** - 速率限制
+  - API 请求速率限制
+  - 资源使用限制
 
 ### 2. **handler/** - HTTP 处理器层
 处理器负责 HTTP 请求的解析、验证和响应，每个处理器对应一个 API 端点。处理器调用控制器完成业务逻辑，并格式化响应。
