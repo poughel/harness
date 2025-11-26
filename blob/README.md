@@ -16,9 +16,9 @@
 **Store 接口**：
 ```go
 type Store interface {
-    Upload(ctx, file, filePath) error
-    GetSignedURL(ctx, filePath, expire, opts...) (string, error)
-    Download(ctx, filePath) (io.ReadCloser, error)
+    Upload(ctx context.Context, file io.Reader, filePath string) error
+    GetSignedURL(ctx context.Context, filePath string, expire time.Time, opts ...SignURLOption) (string, error)
+    Download(ctx context.Context, filePath string) (io.ReadCloser, error)
 }
 ```
 
@@ -264,20 +264,26 @@ func ProvideStore(ctx, config) (Store, error)
 ### 基本使用
 
 ```go
-// 创建文件系统存储
+// 方式 1：使用 ProvideStore（推荐，支持 Wire 依赖注入）
+store, err := blob.ProvideStore(ctx, blob.Config{
+    Provider: blob.ProviderFileSystem,
+    Bucket: "/var/data/blobs",
+})
+
+// 方式 2：直接创建文件系统存储
 fsStore, err := blob.NewFileSystemStore(blob.Config{
     Provider: blob.ProviderFileSystem,
     Bucket: "/var/data/blobs",
 })
 
-// 创建 GCS 存储（使用服务账户密钥）
+// 方式 3：直接创建 GCS 存储（使用服务账户密钥）
 gcsStore, err := blob.NewGCSStore(ctx, blob.Config{
     Provider: blob.ProviderGCS,
     Bucket: "my-bucket",
     KeyPath: "/path/to/service-account-key.json",
 })
 
-// 创建 GCS 存储（使用 Workload Identity）
+// 方式 4：直接创建 GCS 存储（使用 Workload Identity）
 gcsStore, err := blob.NewGCSStore(ctx, blob.Config{
     Provider: blob.ProviderGCS,
     Bucket: "my-bucket",
