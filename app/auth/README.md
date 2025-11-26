@@ -421,14 +421,15 @@ if !allowed {
 }
 
 // 检查多个权限
+scope := &types.Scope{SpacePath: "/root/myproject"}
 allowed, err := authorizer.CheckAll(ctx, session,
     types.PermissionCheck{
-        Scope: &types.Scope{SpacePath: "/root/myproject"},
+        Scope: scope,
         Resource: &types.Resource{Type: enum.ResourceTypeRepo, Identifier: "repo1"},
         Permission: enum.PermissionRepoView,
     },
     types.PermissionCheck{
-        Scope: &types.Scope{SpacePath: "/root/myproject"},
+        Scope: scope,
         Resource: &types.Resource{Type: enum.ResourceTypeRepo, Identifier: "repo2"},
         Permission: enum.PermissionRepoView,
     },
